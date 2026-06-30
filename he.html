@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>הטיול המשפחתי לרומניה 2026 — למשפחה בלבד</title>
+<style>
+  :root {
+    --bg: #0F0B1A;
+    --card: #1A1430;
+    --card-border: #2D2450;
+    --accent: #A78BFA;
+    --accent-soft: rgba(167,139,250,0.14);
+    --green: #34D399;
+    --green-soft: rgba(52,211,153,0.14);
+    --red: #F87171;
+    --warn: #FBBF24;
+    --warn-soft: rgba(251,191,36,0.10);
+    --text: #F5F3FF;
+    --muted: #C4B5FD;
+    --flight: #A78BFA;
+    /* kids palette */
+    --pink: #F472B6;
+    --amber: #FBBF24;
+    --grass: #34D399;
+    --blue: #60A5FA;
+    --purple: #A78BFA;
+    --orange: #FB923C;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background:
+      radial-gradient(circle at 12% -5%, rgba(244,114,182,0.10), transparent 40%),
+      radial-gradient(circle at 95% 0%, rgba(96,165,250,0.10), transparent 38%),
+      var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    padding: 22px 16px 60px;
+  }
+  .wrap { max-width: 900px; margin: 0 auto; }
+
+  /* ---------- kid-friendly hero ---------- */
+  .hero {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, #7C3AED 0%, #A78BFA 45%, #F472B6 100%);
+    border-radius: 22px;
+    padding: 26px 22px 22px;
+    text-align: center;
+    box-shadow: 0 14px 40px rgba(124,58,237,0.35);
+  }
+  .hero::before, .hero::after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.25;
+  }
+  .hero::before { width: 150px; height: 150px; background: #FDE68A; top: -50px; left: -30px; }
+  .hero::after { width: 120px; height: 120px; background: #67E8F9; bottom: -45px; right: -25px; }
+  .hero .balloon { font-size: 34px; line-height: 1; letter-spacing: 6px; position: relative; }
+  .hero h1 {
+    position: relative;
+    font-size: 30px;
+    margin: 8px 0 4px;
+    color: #fff;
+    letter-spacing: -0.01em;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.25);
+  }
+  .hero .subtitle { position: relative; color: rgba(255,255,255,0.95); font-size: 14.5px; font-weight: 600; }
+  .hero .countdown { position: relative; margin-top: 10px; }
+  .hero .countdown .num {
+    display: inline-block;
+    background: rgba(255,255,255,0.22);
+    border: 1px solid rgba(255,255,255,0.35);
+    border-radius: 999px;
+    padding: 5px 16px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #fff;
+  }
+  .lang-toggle {
+    position: relative;
+    margin-top: 12px;
+  }
+  .lang-toggle a {
+    font-size: 12.5px;
+    font-weight: 700;
+    text-decoration: none;
+    color: #fff;
+    background: rgba(0,0,0,0.18);
+    border: 1px solid rgba(255,255,255,0.4);
+    padding: 5px 14px;
+    border-radius: 999px;
+  }
+
+  /* ---------- kids highlights strip ---------- */
+  .kids-strip {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+    justify-content: center;
+    margin: 16px 0 6px;
+  }
+  .kids-pill {
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: 999px;
+    padding: 7px 13px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .kids-pill .e { font-size: 16px; }
+
+  .section-label {
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 0.01em;
+    color: var(--text);
+    margin: 30px 0 12px;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+  }
+  .section-label .e { font-size: 20px; }
+  .section-label::after {
+    content: "";
+    flex: 1;
+    height: 2px;
+    border-radius: 2px;
+    background: linear-gradient(90deg, var(--card-border), transparent);
+  }
+
+  /* ---------- timeline (RTL) ---------- */
+  .rail { position: relative; padding-right: 44px; padding-left: 0; }
+  .rail::before {
+    content: "";
+    position: absolute;
+    right: 14px;
+    top: 6px;
+    bottom: 6px;
+    width: 3px;
+    border-radius: 3px;
+    background: linear-gradient(var(--accent), var(--pink));
+    opacity: 0.5;
+  }
+  .node { position: relative; margin-bottom: 14px; }
+  .node::before {
+    content: var(--emoji, "•");
+    position: absolute;
+    right: 1px;
+    top: 12px;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--card);
+    border: 2.5px solid var(--c, var(--accent));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    box-shadow: 0 0 0 4px var(--bg);
+  }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-right: 4px solid var(--c, var(--accent));
+    border-radius: 14px;
+    padding: 15px 17px;
+  }
+
+  /* ---------- flights ---------- */
+  .flight-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .flight-route { font-weight: 700; font-size: 16px; }
+  .flight-num {
+    font-size: 12px;
+    color: var(--blue);
+    background: rgba(96,165,250,0.16);
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-weight: 700;
+  }
+  .flight-times {
+    display: flex;
+    gap: 26px;
+    margin-top: 10px;
+    font-size: 13px;
+    color: var(--muted);
+  }
+  .flight-times b { color: var(--text); font-size: 14px; }
+  .flight-meta {
+    margin-top: 10px;
+    font-size: 12.5px;
+    color: var(--muted);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 14px;
+  }
+  .pax-list { margin-top: 10px; display: flex; flex-wrap: wrap; gap: 6px; }
+  .pax-chip {
+    font-size: 11.5px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--card-border);
+    padding: 3px 9px;
+    border-radius: 20px;
+    color: var(--muted);
+  }
+
+  /* ---------- info cards ---------- */
+  .acc-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .acc-name { font-weight: 800; font-size: 17px; display: flex; align-items: center; gap: 8px; }
+  .acc-dates {
+    font-size: 12.5px;
+    color: var(--accent);
+    background: var(--accent-soft);
+    padding: 3px 10px;
+    border-radius: 6px;
+    white-space: nowrap;
+    font-weight: 700;
+  }
+  .acc-address { font-size: 13px; color: var(--muted); margin-top: 6px; }
+  .acc-address a { color: var(--green); text-decoration: underline; }
+  .acc-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px 18px;
+    margin-top: 12px;
+    font-size: 12.5px;
+  }
+  .acc-grid .label { color: var(--muted); }
+  .acc-grid .val { color: var(--text); font-weight: 500; }
+  .acc-grid .val a { color: var(--green); text-decoration: underline; }
+  .acc-notes {
+    margin-top: 12px;
+    font-size: 12.5px;
+    color: var(--warn);
+    background: var(--warn-soft);
+    border: 1px solid rgba(251,191,36,0.3);
+    border-radius: 8px;
+    padding: 8px 12px;
+  }
+  .acc-links { margin-top: 14px; display: flex; gap: 10px; flex-wrap: wrap; }
+  .btn {
+    font-size: 12.5px;
+    font-weight: 700;
+    text-decoration: none;
+    padding: 7px 14px;
+    border-radius: 8px;
+    border: 1px solid var(--card-border);
+    color: var(--text);
+    background: rgba(255,255,255,0.03);
+    transition: all 0.15s ease;
+  }
+  .btn:hover { border-color: var(--accent); color: var(--accent); }
+  .btn.primary { background: var(--accent); color: #0F0B1A; border-color: var(--accent); }
+  .btn.primary:hover { opacity: 0.88; color: #0F0B1A; }
+
+  .day-body { margin-top: 6px; font-size: 13.5px; color: var(--text); line-height: 1.6; }
+  .day-body a { color: var(--green); text-decoration: underline; }
+  .day-body a:hover { color: var(--accent); }
+
+  .option-grid { display: grid; grid-template-columns: 1fr; gap: 8px; margin-top: 12px; }
+  .option {
+    background: rgba(167,139,250,0.06);
+    border: 1px solid var(--card-border);
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 12.5px;
+    color: var(--text);
+    line-height: 1.55;
+  }
+  .option a { color: var(--green); text-decoration: underline; }
+  .option .opt-label {
+    color: var(--warn);
+    font-weight: 800;
+    font-size: 11px;
+    letter-spacing: 0.02em;
+    margin-bottom: 3px;
+  }
+  .move-note {
+    margin-top: 12px;
+    padding: 10px 12px;
+    background: var(--warn-soft);
+    border-right: 3px solid var(--warn);
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text);
+  }
+
+  .gap-note {
+    text-align: center;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--muted);
+    margin: 8px 0;
+    padding-right: 44px;
+  }
+  .ltr { direction: ltr; unicode-bidi: embed; display: inline-block; }
+  .footer-note { text-align: center; color: var(--muted); font-size: 12px; margin-top: 34px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero">
+    <div class="balloon">🎈 🏰 ✈️ 🐻 🎢</div>
+    <h1>הטיול המשפחתי לרומניה</h1>
+    <div class="subtitle">31 ביולי – 15 באוגוסט 2026 · רונן, דנה, גפן, אלמוג ואגם</div>
+    <div class="countdown"><span class="num">★ 15 לילות של הרפתקה ★</span></div>
+    <div class="lang-toggle"><a href="index.html">🇬🇧 English version</a></div>
+  </div>
+
+  <div class="kids-strip">
+    <div class="kids-pill"><span class="e">🏰</span> טירות</div>
+    <div class="kids-pill"><span class="e">🐻</span> דובים</div>
+    <div class="kids-pill"><span class="e">🐎</span> סוסים</div>
+    <div class="kids-pill"><span class="e">🌊</span> פארקי מים</div>
+    <div class="kids-pill"><span class="e">🧗</span> הרפתקאות</div>
+    <div class="kids-pill"><span class="e">🧂</span> מכרה מלח</div>
+    <div class="kids-pill"><span class="e">🧀</span> חוות גבינה</div>
+    <div class="kids-pill"><span class="e">⛸️</span> החלקה על הקרח</div>
+  </div>
+
+  <!-- ===================== FLIGHTS ===================== -->
+  <div class="section-label"><span class="e">✈️</span> טיסות</div>
+  <div class="rail">
+    <div class="node" style="--emoji:'✈️'; --c:var(--blue)">
+      <div class="card">
+        <div class="flight-head">
+          <div class="flight-route">תל אביב (TLV) ✈️ בוקרשט (OTP)</div>
+          <div class="flight-num">LY575</div>
+        </div>
+        <div class="flight-times">
+          <div>המראה<br><b>14:45, יום ו׳ 31.7.2026</b></div>
+          <div>נחיתה<br><b>17:25, יום ו׳ 31.7.2026</b></div>
+        </div>
+        <div class="flight-meta">
+          <span>תיירים קלאסי (L)</span>
+          <span>משך 2:40 שעות</span>
+          <span>טרמינל 3</span>
+          <span>מופעל ע״י אל על</span>
+          <span>מזוודה אחת לאדם</span>
+        </div>
+        <div class="pax-list">
+          <span class="pax-chip">רונן · 26A · ארוחה צמחונית (VGML)</span>
+          <span class="pax-chip">דנה</span>
+          <span class="pax-chip">גפן · 26K</span>
+          <span class="pax-chip">אלמוג · 26J</span>
+          <span class="pax-chip">אגם · 26B</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="gap-note">15 לילות ברומניה 🇷🇴</div>
+
+    <div class="node" style="--emoji:'🛬'; --c:var(--blue)">
+      <div class="card">
+        <div class="flight-head">
+          <div class="flight-route">בוקרשט (OTP) ✈️ תל אביב (TLV)</div>
+          <div class="flight-num">LY9490</div>
+        </div>
+        <div class="flight-times">
+          <div>המראה<br><b>20:45, שבת 15.8.2026</b></div>
+          <div>נחיתה<br><b>23:20, שבת 15.8.2026</b></div>
+        </div>
+        <div class="flight-meta">
+          <span>תיירים קלאסי (L)</span>
+          <span>משך 2:35 שעות</span>
+          <span>טרמינל 3</span>
+          <span>מופעל ע״י TAROM, משווק ע״י אל על</span>
+          <span>מזוודה אחת לאדם</span>
+        </div>
+        <div class="pax-list">
+          <span class="pax-chip">רונן</span>
+          <span class="pax-chip">דנה</span>
+          <span class="pax-chip">גפן</span>
+          <span class="pax-chip">אלמוג</span>
+          <span class="pax-chip">אגם</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== RENTAL CAR ===================== -->
+  <div class="section-label"><span class="e">🚗</span> רכב שכור</div>
+  <div class="rail">
+    <div class="node" style="--emoji:'🚗'; --c:var(--amber)">
+      <div class="card">
+        <div class="acc-head">
+          <div class="acc-name">Trio Rent a Car (דרך Discover Cars)</div>
+          <div class="acc-dates">31.7 – 15.8</div>
+        </div>
+        <div class="acc-address">איסוף והחזרה: שדה התעופה אנרי קואנדה בוקרשט (OTP), שירות Meet &amp; Greet</div>
+        <div class="acc-grid">
+          <div class="label">רכב</div><div class="val">Skoda Octavia Estate או דומה (אוטומט, 5 מושבים)</div>
+          <div class="label">איסוף</div><div class="val">17:30 יום ו׳ 31.7 (אושר 18:30)</div>
+          <div class="label">החזרה</div><div class="val">20:00 שבת 15.8</div>
+          <div class="label">תשלום באיסוף</div><div class="val">477 יורו</div>
+          <div class="label">פיקדון</div><div class="val">פרטים נשלחים בנפרד (מוחזר; כפול אם חוצים גבולות)</div>
+          <div class="label">מספר אישור</div><div class="val"><span class="ltr">D012838173-AN7L</span></div>
+        </div>
+        <div class="acc-notes">נקודת מפגש: טרמינל יציאות, שער A. בהגעה התקשרו <span class="ltr">+40 741 641 029</span> להסעת איסוף.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== ITINERARY ===================== -->
+  <div class="section-label"><span class="e">🗺️</span> מסלול יום-יום</div>
+  <div class="rail">
+
+    <div class="node" style="--emoji:'🍝'; --c:var(--pink)">
+      <div class="card">
+        <div class="acc-head"><div class="acc-name">יום ו׳ 31.7 — נחיתה וארוחת ערב</div></div>
+        <div class="day-body">נוחתים ב-17:25, אוספים את הרכב השכור ומתמקמים ב-Vila Cotroceni. ארוחת ערב נינוחה ליד הדירה: <a href="https://www.tripadvisor.com/Restaurant_Review-g294458-d26443408-Reviews-Pergola_Cotroceni-Bucharest.html" target="_blank">Pergola Cotroceni</a> (4.7–4.9★, יש אפשרויות צמחוניות/טבעוניות, כקילומטר הליכה).</div>
+      </div>
+    </div>
+
+    <div class="node" style="--emoji:'🛍️'; --c:var(--amber)">
+      <div class="card">
+        <div class="acc-head"><div class="acc-name">שבת 1.8 — קניות</div></div>
+        <div class="day-body"><a href="https://www.google.com/maps?q=AFI+Cotroceni+Mall+Bucharest" target="_blank">קניון AFI Cotroceni</a> — צמוד לדירה ולגן הבוטני, הליכה קצרה, מגוון רחב של חנויות ואזור מסעדות. ⛸️ אופציה: <a href="https://patinoarafi.ro/en/home/" target="_blank">Cotroceni on Ice</a>, מגלשת קרח מקורה בתוך הקניון, פתוחה כל השנה במקטעים של 90 דקות — הילדים יאהבו!</div>
+      </div>
+    </div>
+
+    <div class="node" style="--emoji:'🏛️'; --c:var(--grass)">
+      <div class="card">
+        <div class="acc-head"><div class="acc-name">יום א׳ 2.8 — העיר העתיקה של בוקרשט (2 משפחות)</div></div>
+        <div class="day-body">
+          <a href="https://www.google.com/maps?q=Lipscani+Bucharest" target="_blank">ליפסקני</a> ·
+          <a href="https://www.google.com/maps?q=Stavropoleos+Church+Bucharest" target="_blank">כנסיית סטברופולאוס</a> ·
+          <a href="https://www.google.com/maps?q=Caru+cu+Bere+Bucharest" target="_blank">Caru' cu Bere</a> לארוחת צהריים ·
+          <a href="https://www.google.com/maps?q=Cismigiu+Gardens+Bucharest" target="_blank">גני צ׳ישמיג׳יו</a> אחר הצהריים ·
+          <a href="https://maps.app.goo.gl/iyTBRdbMGLLxxeu38" target="_blank">מוזיאון החושים</a> (ליד הגן הבוטני, תצוגות אינטראקטיביות וחושיות — מעולה לילדים)
+        </div>
+      </div>
+    </div>
+
+    <div class="gap-note">★ 3–9 באוג׳ (3 משפחות יחד) ★</div>
+
+    <div class="node" style="--emoji:'🧂'; --c:var(--blue)">
+      <div class="card">
+        <div class="acc-head"><div class="acc-name">יום ב׳ 3.8 — מכרה המלח בדרך</div></div>
+        <div class="day-body">נוסעים לפויאנה מארולוי דרך <a href="https://maps.app.goo.gl/268tRLqatUvKdYD76" target="_blank">מכרה המלח סלאניק פראהובה</a> (כ-1:45 שעות מבוקרשט). בפנים: קארטינג, פינג-פונג, ביליארד, מתקני משחק וטמפרטורה קבועה של 12–13°C. ממשיכים ל-Casa Raul, מגיעים בערב.</div>
+      </div>
+    </div>
+
+    <div class="gap-note">★ בית הבסיס: Casa Raul ★</div>
+
+    <div class="node" style="--emoji:'🏞️'; --c:var(--purple)">
+      <div class="card">
+        <div class="acc-head"><div class="acc-name">יום ג׳ 4.8 — יום טבע</div></div>
+        <div class="option-grid">
+          <div class="option">
+            <div class="opt-label">פעילות עיקרית · מצוקי זרנשט</div>
+            <a href="https://www.google.com/maps?q=Prapastiile+Zarnestiului" target="_blank">מצוקי זרנשט (Prăpăstiile Zărneștiului)</a> — קניון סלעי דרמטי עם קירות צרים וגבוהים, שביל חצץ כמעט מישורי ומוצל (כשעה לכל כיוון), מתאים למשפחות. שער הכניסה לפארק הלאומי פיאטרה קראיולוי.
+          </div>
+          <div class="option">
+            <div class="opt-label">תוספת לבחירה · חוות גבינה</div>
+            <a href="https://www.google.com/maps?q=traditional+sheepfold+cheese+Bran+Moeciu" target="_blank">דיר כבשים מסורתי (stână)</a> בגבעות בראן–מוצ׳או — רואים את הרועים מכינים ומעשנים גבינת טלמאה/קאש, טועמים מוצרי חלב טריים ופוגשים את העדר. כפרי ומאוד ידידותי לילדים; כדאי להתקשר מראש לתיאום.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="node" style="--emoji:'🏰'; --c:var(--orange)">
+      <div class="card">
+        <div class="acc-head"><div class="acc-name">יום ד׳ 5.8 — טירת בראן ומצודת רשנוב</div></div>
+        <div class="day-body">
+          <a href="https://www.google.com/maps?q=Bran+Castle" target="_blank">טירת בראן</a> (טירת דרקולה!) ·
+          <a href="https://www.google.com/maps?q=Rasnov+Fortress" target="_blank">מצודת רשנוב</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="node" style="--emoji:'🌊'; --c:var(--pink)">
+      <div class="card">
+        <div class="acc-head"><div class="acc-name">יום ה׳ 6.8 — פארק מים</div></div>
+        <div class="day-body"><a href="https://paradisulacvatic.ro/" target="_blank">Aquatic Paradise Brasov</a> — בריכות מקורות ופתוחות, מגלשות וסאונות, גם פתרון מצוין ליום גשום.</div>
+      </div>
+    </div>
+
+    <div class="node" style="--emoji:'🏙️'; --c:var(--amber)">
+      <div class="card">
+        <div class="acc-head"><div class="acc-name">יום ו׳ 7.8 — העיר העתיקה של בראשוב</div></div>
+        <div class="day-body">
+          <a href="https://www.google.com/maps?q=Brasov+old+town" target="_blank">העיר העתיקה</a> ·
+          טיפוס אל <a href="https://www.google.com/maps?q=Brasov+sign+Mount+Tampa" target="_blank">שלט בראשוב על הר טמפה</a> (כשעה, בינוני, מדורג טוב יותר מהרכבל לפי המבקרים) ·
+          <a href="https://www.parc-aventura.ro/en/" target="_blank">פארק ההרפתקאות של בראשוב (פארק חבלים)</a> אם נשאר כוח
+        </div>
+        <div class="move-note">🚚 משפחה 1 עוברת היום לבראשוב — עוזבת את פויאנה מארולוי ומתמקמת בבראשוב לשארית השהות.</div>
+      </div>
+    </div>
+
+    <div class="node" style="--emoji:'🐎'; --c:var(--grass)">
+      <div class="card" style="--c:var(--grass)">
+        <div class="acc-head"><div class="acc-name">שבת 8.8 — משפחות 2+3</div></div>
+        <div class="option-grid">
+          <div class="option">
+            <div class="opt-label">פעילות עיקרית · רכיבה על סוסים</div>
+            <a href="https://www.google.com/maps?q=Poiana+Brasov+Horse+Riding+Center" target="_blank">מרכז הרכיבה פויאנה בראשוב</a> — מדורג גבוה למשפחות, פונים לרוכבים צעירים וסוסים לגדולים, שבילי יער ומתקני משחק להפסקות.
+          </div>
+          <div class="option">
+            <div class="opt-label">תוספת ערב לבחירה · צפייה בדובים</div>
+            <a href="https://www.romanianfriend.com/tours/bear-watching-trip-brasov-transylvania" target="_blank">סיור צפייה בדובים מבראשוב</a> — בלי הליכה, יושבים וממתינים במחבוא מאובטח, סיכוי גבוה לראות (רוב הקבוצות רואות 5+), יציאה בערב (16:00–18:00). לוודא גיל מינימום עם המפעיל (לרוב 7+ עד 12+).
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="node" style="--emoji:'🏰'; --c:var(--blue)">
+      <div class="card" style="--c:var(--blue)">
+        <div class="acc-head"><div class="acc-name">יום א׳ 9.8 — משפחות 1+2+3, נסיעה לסינאיה</div></div>
+        <div class="day-body">חוזרים לקבוצה המלאה. נוסעים מפויאנה מארולוי לסינאיה (כ-1.5 שעות) עם עצירה ב<a href="https://cantacuzinocastle.com/en/" target="_blank">טירת קנטקוזינו</a> בבושטני שבדרך. טירה נאו-רומנית (1911) — מקום הצילומים האמיתי של "אקדמיית נברמור" בסדרה "מרחבת" (Wednesday) של נטפליקס. סיור מודרך בפנים (כ-30 דק׳), מרפסת עם נוף להרי בוצ׳ג׳, גנים עם מזרקות, פארק הרפתקאות לילדים ואומגה.</div>
+        <div class="option-grid">
+          <div class="option">
+            <div class="opt-label">אופציית טירה</div>
+            <a href="https://bilete.peles.ro" target="_blank">טירת פלש</a> — דורש הזמנת כניסה מתוזמנת מראש; באוגוסט נמכר 1–3 שבועות לפני.
+          </div>
+          <div class="option">
+            <div class="opt-label">אופציה ללא טירה · מסלול מפל</div>
+            <a href="https://www.google.com/maps?q=Cascada+Urlatoarea+Busteni" target="_blank">מפל אורלטוארה</a> — שביל יער קל ומסומן ליד בושטני, כשעה הלוך-חזור, מתאים למשפחות, חינם, בלי כרטיסים ובלי תורים.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="node" style="--emoji:'🏊'; --c:var(--purple)">
+      <div class="card">
+        <div class="acc-head"><div class="acc-name">יום ב׳ 10.8 — סינאיה</div></div>
+        <div class="day-body">מה שלא הספקנו ב-9.8 (טירת פלש / מסלול המפל) אפשר להשלים היום. אחר הצהריים בבריכה/ספא של המלון.</div>
+      </div>
+    </div>
+
+    <div class="node" style="--emoji:'🚗'; --c:var(--orange)">
+      <div class="card">
+        <div class="acc-head"><div class="acc-name">יום ג׳ 11.8 — חזרה לבוקרשט עם עצירה בדרך</div></div>
+        <div class="day-body">נוסעים מסינאיה לבוקרשט. עצירה מומלצת: <a href="https://cantacuzinocastle.com/en/" target="_blank">טירת קנטקוזינו</a> (אם לא ביקרנו ב-9.8) או <a href="https://www.google.com/maps?q=Snagov+Monastery" target="_blank">מנזר סנגוב</a> (מקום הקבורה האגדי של ולאד המשפד, אגם ציורי). מתמקמים ב-Downtown Jungle Vibes.</div>
+      </div>
+    </div>
+
+    <div class="node" style="--emoji:'💦'; --c:var(--pink)">
+      <div class="card">
+        <div class="acc-head"><div class="acc-name">יום ד׳ 12.8 — Therme București</div></div>
+        <div class="day-body"><a href="https://www.thermebucuresti.ro/" target="_blank">Therme București</a> — יום שלם של פארק מים וספא, בריכות מקורות ופתוחות, סאונות ואזורי רגיעה.</div>
+      </div>
+    </div>
+
+    <div class="node" style="--emoji:'🏛️'; --c:var(--amber)">
+      <div class="card">
+        <div class="acc-head"><div class="acc-name">יום ה׳ 13.8 — ארמון הפרלמנט וקניות</div></div>
+        <div class="day-body"><a href="https://cic.cdep.ro/" target="_blank">סיור בארמון הפרלמנט</a> — מומלץ להזמין מראש. אחר כך קניות ב<a href="https://www.google.com/maps?q=Fashion+House+Outlet+Centre+Militari+Bucharest" target="_blank">Fashion House Outlet Centre Militari</a> — כ-60 חנויות כולל נייקי, אדידס, פומה וגס, הנחות יומיות של 30%–90%, ופינת משחקים לילדים. מקום שונה מהקניון של 1.8, אז בלי חזרות.</div>
+      </div>
+    </div>
+
+    <div class="node" style="--emoji:'🌳'; --c:var(--grass)">
+      <div class="card">
+        <div class="acc-head"><div class="acc-name">יום ו׳ 14.8 — יום חופשי</div></div>
+        <div class="day-body">שבת היא יום הרגיעה והסיכום, אז ננצל את יום שישי למשהו ממשי: <a href="https://www.google.com/maps?q=Herastrau+Park+Bucharest" target="_blank">פארק הראסטראו</a> + שיט בסירה + <a href="https://www.google.com/maps?q=Village+Museum+Bucharest" target="_blank">מוזיאון הכפר</a>, או ארוחה אחרונה ב<a href="https://www.google.com/maps?q=Aubergine+restaurant+Bucharest" target="_blank">Aubergine</a> או <a href="https://www.google.com/maps?q=Simbio+Bucharest" target="_blank">Simbio</a>.</div>
+      </div>
+    </div>
+
+    <div class="node" style="--emoji:'🛫'; --c:var(--blue)">
+      <div class="card">
+        <div class="acc-head"><div class="acc-name">שבת 15.8 — יום חופשי / חזרה הביתה</div></div>
+        <div class="day-body">צ׳ק-אאוט מאוחר (עד 11:00), בוקר נינוח, אריזה, החזרת הרכב, טיסה ב-20:45.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ===================== ACCOMMODATION ===================== -->
+  <div class="section-label"><span class="e">🏨</span> לינה</div>
+  <div class="rail">
+
+    <div class="node" style="--emoji:'🏨'; --c:var(--purple)">
+      <div class="card">
+        <div class="acc-head">
+          <div class="acc-name">Vila Cotroceni Boutique Apartments</div>
+          <div class="acc-dates">31.7 – 3.8 · 3 לילות</div>
+        </div>
+        <div class="acc-address">14 Strada Dimitrie Brânză, Sector 6, 060102 בוקרשט ·
+          <a href="https://www.google.com/maps?q=44.26279,26.0665" target="_blank">מפה</a>
+        </div>
+        <div class="acc-grid">
+          <div class="label">סוג חדר</div><div class="val">דירת שני חדרי שינה</div>
+          <div class="label">מחיר</div><div class="val">₪1,644 (2,526 RON, כולל מסים)</div>
+          <div class="label">צ׳ק-אין</div><div class="val">14:00 – 22:00</div>
+          <div class="label">צ׳ק-אאוט</div><div class="val">01:00 – 11:00</div>
+          <div class="label">ביטול חינם</div><div class="val">עד 29.7.2026</div>
+          <div class="label">טלפון</div><div class="val"><span class="ltr">+40 745 562 635</span></div>
+        </div>
+        <div class="acc-notes">אין קבלה 24/7 — יש להתקשר או לכתוב ל-booking@vilacotroceni.ro עם שעת ההגעה לפני הצ׳ק-אין. אסורות מסיבות/מוזיקה רועשת.</div>
+        <div class="acc-links">
+          <a class="btn" href="tel:+40745562635">התקשרו למקום</a>
+          <a class="btn" href="mailto:booking@vilacotroceni.ro">שלחו מייל</a>
+          <a class="btn primary" href="https://www.booking.com/hotel/ro/vila-cotroceni-boutique-apartments.html" target="_blank">צפו ב-Booking.com</a>
+          <a class="btn" href="https://www.google.com/maps?q=44.26279,26.0665" target="_blank">כתובת 📍</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="gap-note">נסיעה לפויאנה מארולוי 🚗</div>
+
+    <div class="node" style="--emoji:'🏡'; --c:var(--grass)">
+      <div class="card">
+        <div class="acc-head">
+          <div class="acc-name">Casa Raul</div>
+          <div class="acc-dates">3 – 9.8 · 6 לילות</div>
+        </div>
+        <div class="acc-address">Principala nr.329, 507160 Poiana Mărului ·
+          <a href="https://www.google.com/maps?q=45.60412,25.18216" target="_blank">מפה</a>
+        </div>
+        <div class="acc-grid">
+          <div class="label">סוג חדר</div><div class="val">בית עם חמישה חדרי שינה</div>
+          <div class="label">מחיר</div><div class="val">₪5,378 (8,262 RON, כולל מסים)</div>
+          <div class="label">צ׳ק-אין</div><div class="val">15:00 – 23:30</div>
+          <div class="label">צ׳ק-אאוט</div><div class="val">08:00 – 11:00</div>
+          <div class="label">ביטול חינם</div><div class="val">עד 19.7.2026</div>
+          <div class="label">טלפון</div><div class="val"><span class="ltr">+40 743 176 315</span></div>
+        </div>
+        <div class="acc-notes">משותף עם משפחות 2 ו-3. חניה פרטית חינם באתר. יש להודיע למקום על שעת ההגעה מראש.</div>
+        <div class="acc-links">
+          <a class="btn" href="tel:+40743176315">התקשרו למקום</a>
+          <a class="btn primary" href="https://www.booking.com/hotel/ro/casa-raul-poiana-marului.html" target="_blank">צפו ב-Booking.com</a>
+          <a class="btn" href="https://www.google.com/maps?q=45.60412,25.18216" target="_blank">כתובת 📍</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="gap-note">נסיעה לסינאיה 🚗</div>
+
+    <div class="node" style="--emoji:'🏨'; --c:var(--blue)">
+      <div class="card">
+        <div class="acc-head">
+          <div class="acc-name">Hotel Sinaia</div>
+          <div class="acc-dates">9 – 11.8 · 2 לילות</div>
+        </div>
+        <div class="acc-address">Bd. Carol I nr. 8, 106100 סינאיה ·
+          <a href="https://www.google.com/maps?q=45.35175,25.549583" target="_blank">מפה</a>
+        </div>
+        <div class="acc-grid">
+          <div class="label">חדרים</div><div class="val">2 חדרים (זוגי סטנדרט עם ספא + זוגי עם ספא)</div>
+          <div class="label">מחיר</div><div class="val">₪1,311 (2,014 RON, כולל מסים)</div>
+          <div class="label">צ׳ק-אין</div><div class="val">מ-15:00</div>
+          <div class="label">צ׳ק-אאוט</div><div class="val">עד 12:00</div>
+          <div class="label">ביטול</div><div class="val">חינם עד 3 ימים לפני ההגעה</div>
+          <div class="label">טלפון</div><div class="val"><span class="ltr">+40 244 302 900</span></div>
+        </div>
+        <div class="acc-notes">ארוחת בוקר כלולה בשני החדרים. חניה ציבורית בתשלום (40 RON ליום). גישה לבריכה דורשת הזמנה מראש.</div>
+        <div class="acc-links">
+          <a class="btn" href="tel:+40244302900">התקשרו למקום</a>
+          <a class="btn primary" href="https://www.booking.com/hotel/ro/rina-sinaia.html" target="_blank">צפו ב-Booking.com</a>
+          <a class="btn" href="https://www.google.com/maps?q=45.35175,25.549583" target="_blank">כתובת 📍</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="gap-note">חזרה לבוקרשט 🚗</div>
+
+    <div class="node" style="--emoji:'🌴'; --c:var(--orange)">
+      <div class="card">
+        <div class="acc-head">
+          <div class="acc-name">Downtown Jungle Vibes</div>
+          <div class="acc-dates">11 – 15.8 · 4 לילות</div>
+        </div>
+        <div class="acc-address">18 Strada Modrogan, Sector 1, 011826 בוקרשט ·
+          <a href="https://www.google.com/maps?q=Strada+Modrogan+18+Bucharest" target="_blank">מפה</a>
+        </div>
+        <div class="acc-grid">
+          <div class="label">סוג חדר</div><div class="val">דירה</div>
+          <div class="label">צ׳ק-אין</div><div class="val">15:00 – 00:00</div>
+          <div class="label">צ׳ק-אאוט</div><div class="val">עד 11:00</div>
+          <div class="label">מספר אישור</div><div class="val"><span class="ltr">5881235957</span></div>
+          <div class="label">קוד כניסה</div><div class="val">פרטים נשלחים בנפרד</div>
+          <div class="label">טלפון</div><div class="val"><span class="ltr">+40 742 118 487</span></div>
+        </div>
+        <div class="acc-notes">צ׳ק-אין עצמי דרך תיבת מפתחות (lockbox). קישור לצ׳ק-אין מקוון מגיע יום לפני ההגעה במייל, ואחריו הוראות הכניסה הרשמיות.</div>
+        <div class="acc-links">
+          <a class="btn primary" href="https://www.booking.com/hotel/ro/downtown-jungle-vibes.he.html" target="_blank">צפו ב-Booking.com</a>
+          <a class="btn" href="tel:+40742118487">התקשרו למקום</a>
+          <a class="btn" href="https://www.google.com/maps?q=Strada+Modrogan+18+Bucharest" target="_blank">כתובת 📍</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer-note">★ נוסעים טובים = נוסעים שמחים · טיול נעים למשפחת קיסר! 🇷🇴🎉 ★</div>
+</div>
+</body>
+</html>
