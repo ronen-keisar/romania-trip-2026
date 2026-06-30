@@ -315,6 +315,27 @@
   }
   .ltr { direction: ltr; unicode-bidi: embed; display: inline-block; }
   .footer-note { text-align: center; color: var(--muted); font-size: 12px; margin-top: 34px; }
+
+  @media (max-width: 600px) {
+    body { padding: 16px 11px 48px; }
+    .hero { padding: 22px 16px 18px; border-radius: 18px; }
+    .hero h1 { font-size: 24px; }
+    .hero .balloon { font-size: 26px; letter-spacing: 3px; }
+    .hero .subtitle { font-size: 13px; }
+    .kids-strip { gap: 7px; }
+    .kids-pill { font-size: 12px; padding: 6px 11px; }
+    .section-label { margin: 26px 0 12px; }
+    .rail { padding-right: 40px; }
+    .rail::before { right: 12px; }
+    .node::before { right: 0; width: 26px; height: 26px; font-size: 14px; }
+    .gap-note { padding-right: 40px; }
+    .flight-route { font-size: 15px; }
+    .flight-times { gap: 16px; }
+    .acc-name { font-size: 15.5px; }
+    .acc-grid { grid-template-columns: 40% 1fr; gap: 7px 12px; }
+    .acc-links { gap: 8px; }
+    .btn { flex: 1 1 auto; text-align: center; }
+  }
 </style>
 </head>
 <body>

@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Romania Family Trip 2026 — Family Only</title>
 <style>
   :root {
@@ -236,6 +237,23 @@
   .legend { display: flex; gap: 18px; font-size: 11.5px; color: var(--muted); margin-bottom: 4px; }
   .legend span { display: flex; align-items: center; gap: 6px; }
   .dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+
+  @media (max-width: 600px) {
+    body { padding: 20px 12px 48px; }
+    h1 { font-size: 22px; }
+    .subtitle { font-size: 13px; }
+    .section-label { margin: 26px 0 12px; }
+    .rail { padding-left: 22px; }
+    .rail::before { left: 6px; }
+    .node::before { left: -22px; }
+    .gap-note { padding-left: 22px; }
+    .flight-route { font-size: 15px; }
+    .flight-times { gap: 16px; }
+    .acc-name { font-size: 15.5px; }
+    .acc-grid { grid-template-columns: 40% 1fr; gap: 7px 12px; }
+    .acc-links { gap: 8px; }
+    .btn { flex: 1 1 auto; text-align: center; }
+  }
 </style>
 </head>
 <body>
