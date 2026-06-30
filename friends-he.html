@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>הטיול לרומניה — עם החברים (2–9 באוג׳)</title>
+<style>
+  :root {
+    --bg: #0A1628;
+    --card: #0E2040;
+    --card-border: #1A3660;
+    --sky: #75B2DD;
+    --sky-soft: rgba(117,178,221,0.18);
+    --white: #F0F9FF;
+    --black: #0a0e16;
+    --gold: #FBBF24;
+    --gold-soft: rgba(251,191,36,0.16);
+    --text: #F0F9FF;
+    --text-dim: #93C5FD;
+    --green: #34D399;
+    /* kids palette */
+    --pink: #F472B6;
+    --amber: #FBBF24;
+    --grass: #34D399;
+    --blue: #60A5FA;
+    --orange: #FB923C;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    background-image:
+      repeating-linear-gradient(180deg, rgba(108,180,235,0.05) 0px, rgba(108,180,235,0.05) 40px, transparent 40px, transparent 80px);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    padding: 22px 16px 60px;
+  }
+  .wrap { max-width: 900px; margin: 0 auto; }
+
+  /* ---------- hero ---------- */
+  .hero {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, #0EA5E9 0%, #38BDF8 45%, #FBBF24 100%);
+    border-radius: 22px;
+    padding: 26px 22px 22px;
+    text-align: center;
+    box-shadow: 0 14px 40px rgba(14,165,233,0.3);
+  }
+  .hero::before, .hero::after { content: ""; position: absolute; border-radius: 50%; opacity: 0.22; }
+  .hero::before { width: 150px; height: 150px; background: #FDE68A; top: -50px; right: -30px; }
+  .hero::after { width: 120px; height: 120px; background: #fff; bottom: -45px; left: -25px; }
+  .hero .balloon { font-size: 34px; line-height: 1; letter-spacing: 6px; position: relative; }
+  .hero h1 { position: relative; font-size: 29px; margin: 8px 0 4px; color: #fff; text-shadow: 0 2px 10px rgba(0,0,0,0.25); }
+  .hero .subtitle { position: relative; color: rgba(255,255,255,0.96); font-size: 14.5px; font-weight: 600; }
+  .hero .countdown { position: relative; margin-top: 10px; }
+  .hero .countdown .num {
+    display: inline-block;
+    background: rgba(0,0,0,0.16);
+    border: 1px solid rgba(255,255,255,0.4);
+    border-radius: 999px;
+    padding: 5px 16px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #fff;
+  }
+  .lang-toggle { position: relative; margin-top: 12px; }
+  .lang-toggle a {
+    font-size: 12.5px;
+    font-weight: 700;
+    text-decoration: none;
+    color: #fff;
+    background: rgba(0,0,0,0.2);
+    border: 1px solid rgba(255,255,255,0.45);
+    padding: 5px 14px;
+    border-radius: 999px;
+  }
+
+  /* ---------- families ---------- */
+  .families-bar { display: flex; gap: 9px; flex-wrap: wrap; justify-content: center; margin: 16px 0 6px; }
+  .family-chip {
+    background: var(--sky-soft);
+    border: 1px solid var(--sky);
+    color: var(--sky);
+    font-size: 12px;
+    font-weight: 700;
+    padding: 6px 13px;
+    border-radius: 20px;
+  }
+
+  /* ---------- kids highlights ---------- */
+  .kids-strip { display: flex; flex-wrap: wrap; gap: 9px; justify-content: center; margin: 14px 0 6px; }
+  .kids-pill {
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: 999px;
+    padding: 7px 13px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .kids-pill .e { font-size: 16px; }
+
+  .optional-banner {
+    display: block;
+    text-align: center;
+    background: var(--gold-soft);
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    font-size: 12.5px;
+    font-weight: 700;
+    padding: 8px 14px;
+    border-radius: 8px;
+    margin: 14px auto 4px;
+  }
+
+  .section-title { display: flex; align-items: center; gap: 10px; margin: 32px 0 14px; }
+  .section-title .badge {
+    background: var(--gold);
+    color: var(--black);
+    font-weight: 800;
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    padding: 4px 10px;
+    border-radius: 4px;
+  }
+  .section-title h2 { font-size: 19px; margin: 0; color: var(--white); font-weight: 800; }
+  .section-title::after { content: ""; flex: 1; height: 2px; border-radius: 2px; background: linear-gradient(90deg, var(--sky), transparent); }
+
+  /* ---------- timeline (RTL, emoji markers) ---------- */
+  .rail { position: relative; padding-right: 44px; padding-left: 0; }
+  .rail::before {
+    content: "";
+    position: absolute;
+    right: 14px;
+    top: 6px;
+    bottom: 6px;
+    width: 3px;
+    border-radius: 3px;
+    background: repeating-linear-gradient(180deg, var(--sky) 0px, var(--sky) 8px, var(--gold) 8px, var(--gold) 16px);
+    opacity: 0.65;
+  }
+  .node { position: relative; margin-bottom: 14px; }
+  .node::before {
+    content: var(--emoji, "•");
+    position: absolute;
+    right: -43px;
+    top: 12px;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--card);
+    border: 2.5px solid var(--c, var(--sky));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    box-shadow: 0 0 0 4px var(--bg);
+  }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-right: 4px solid var(--c, var(--sky));
+    border-radius: 12px;
+    padding: 15px 17px;
+  }
+
+  .day-head { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 8px; }
+  .day-name { font-weight: 800; font-size: 16.5px; color: var(--white); }
+  .day-date {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--black);
+    background: var(--gold);
+    padding: 3px 10px;
+    border-radius: 6px;
+    white-space: nowrap;
+  }
+  .day-body { margin-top: 10px; font-size: 13.5px; color: var(--text); line-height: 1.6; }
+  .day-body a { color: var(--green); text-decoration: underline; }
+  .day-body a:hover { color: var(--white); }
+
+  .option-grid { display: grid; grid-template-columns: 1fr; gap: 8px; margin-top: 12px; }
+  .option {
+    background: rgba(108,180,235,0.06);
+    border: 1px solid var(--card-border);
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 12.5px;
+    color: var(--text);
+    line-height: 1.55;
+  }
+  .option a { color: var(--green); text-decoration: underline; }
+  .option .opt-label { color: var(--gold); font-weight: 800; font-size: 11px; margin-bottom: 3px; }
+
+  .move-note {
+    margin-top: 12px;
+    padding: 10px 12px;
+    background: var(--gold-soft);
+    border-right: 3px solid var(--gold);
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--white);
+  }
+
+  .weather {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 11.5px;
+    font-weight: 700;
+    color: var(--sky);
+    background: var(--sky-soft);
+    border: 1px solid var(--card-border);
+    padding: 3px 9px;
+    border-radius: 6px;
+    margin-top: 10px;
+  }
+
+  /* ---------- accommodation ---------- */
+  .acc-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; flex-wrap: wrap; }
+  .acc-name { font-weight: 800; font-size: 17px; color: var(--white); }
+  .acc-dates {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--black);
+    background: var(--sky);
+    padding: 3px 10px;
+    border-radius: 6px;
+    white-space: nowrap;
+  }
+  .acc-address { font-size: 13px; color: var(--text); margin-top: 6px; }
+  .acc-address a { color: var(--green); text-decoration: underline; }
+  .acc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 18px; margin-top: 12px; font-size: 12.5px; }
+  .acc-grid .label { color: var(--text-dim); }
+  .acc-grid .val { color: var(--text); font-weight: 600; }
+  .acc-links { margin-top: 14px; display: flex; gap: 10px; flex-wrap: wrap; }
+  .btn {
+    font-size: 12.5px;
+    font-weight: 700;
+    text-decoration: none;
+    padding: 7px 14px;
+    border-radius: 8px;
+    border: 1px solid var(--sky);
+    color: var(--sky);
+    background: rgba(108,180,235,0.06);
+    display: inline-block;
+  }
+  .btn:hover { background: var(--sky); color: var(--black); }
+  .btn.gold { border-color: var(--gold); color: var(--gold); }
+  .btn.gold:hover { background: var(--gold); color: var(--black); }
+
+  .gap-note {
+    text-align: center;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--gold);
+    letter-spacing: 0.03em;
+    margin: 8px 0;
+    padding-right: 44px;
+  }
+  .ltr { direction: ltr; unicode-bidi: embed; display: inline-block; }
+  .footer-note { text-align: center; color: var(--text-dim); font-size: 12px; margin-top: 34px; }
+
+  @media (max-width: 600px) {
+    body { padding: 16px 11px 48px; }
+    .hero { padding: 22px 16px 18px; border-radius: 18px; }
+    .hero h1 { font-size: 23px; }
+    .hero .balloon { font-size: 26px; letter-spacing: 3px; }
+    .hero .subtitle { font-size: 13px; }
+    .kids-strip, .families-bar { gap: 7px; }
+    .kids-pill { font-size: 12px; padding: 6px 11px; }
+    .family-chip { font-size: 11.5px; padding: 5px 11px; }
+    .section-title { margin: 26px 0 12px; }
+    .rail { padding-right: 40px; }
+    .rail::before { right: 12px; }
+    .node::before { right: -39px; width: 26px; height: 26px; font-size: 14px; }
+    .gap-note { padding-right: 40px; }
+    .day-name { font-size: 15px; }
+    .acc-name { font-size: 15.5px; }
+    .acc-grid { grid-template-columns: 40% 1fr; gap: 7px 12px; }
+    .acc-links { gap: 8px; }
+    .btn { flex: 1 1 auto; text-align: center; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero">
+    <div class="balloon">🎈 🏰 🐻 🐎 ⛰️</div>
+    <h1>הטיול לרומניה — עם החברים</h1>
+    <div class="subtitle">2–9 באוגוסט 2026 · בוקרשט → פויאנה מארולוי</div>
+    <div class="countdown"><span class="num">★ שלוש משפחות, שבוע אחד גדול ★</span></div>
+    <div class="lang-toggle"><a href="romania-trip-friends-aug2-9.html">🇬🇧 English version</a></div>
+  </div>
+
+  <div class="families-bar">
+    <span class="family-chip">משפחה 1: יעל, שחר, אריאל, הלל, אלעד, שאול</span>
+    <span class="family-chip">משפחה 2: תמר, נדב, יואב, דפנה</span>
+    <span class="family-chip">משפחה 3: דנה, רונן, גפן, אלמוג, אגם</span>
+  </div>
+
+  <div class="kids-strip">
+    <div class="kids-pill"><span class="e">🏰</span> טירות</div>
+    <div class="kids-pill"><span class="e">🐻</span> דובים</div>
+    <div class="kids-pill"><span class="e">🐎</span> סוסים</div>
+    <div class="kids-pill"><span class="e">🌊</span> פארק מים</div>
+    <div class="kids-pill"><span class="e">🧗</span> הרפתקאות</div>
+    <div class="kids-pill"><span class="e">🧂</span> מכרה מלח</div>
+    <div class="kids-pill"><span class="e">🧀</span> חוות גבינה</div>
+  </div>
+
+  <div class="optional-banner">⚠ המסלול שלמטה הוא טיוטה מוצעת</div>
+
+  <div class="section-title">
+    <span class="badge">מסלול</span>
+    <h2>יום אחרי יום 🗺️</h2>
+  </div>
+
+  <div class="rail">
+
+    <div class="node" style="--emoji:'🏛️'; --c:var(--blue)">
+      <div class="card">
+        <div class="day-head">
+          <span class="day-name">העיר העתיקה של בוקרשט</span>
+          <span class="day-date">א׳ · 2.8</span>
+        </div>
+        <div class="day-body">
+          <a href="https://www.google.com/maps?q=Lipscani+Bucharest" target="_blank">ליפסקני</a> ·
+          <a href="https://www.google.com/maps?q=Stavropoleos+Church+Bucharest" target="_blank">כנסיית סטברופולאוס</a> ·
+          <a href="https://www.google.com/maps?q=Caru+cu+Bere+Bucharest" target="_blank">Caru' cu Bere</a> לארוחת צהריים ·
+          <a href="https://www.google.com/maps?q=Cismigiu+Gardens+Bucharest" target="_blank">גני צ׳ישמיג׳יו</a> אחר הצהריים (סירות פדל, מתקני משחק)
+        </div>
+        <div class="weather">☀️ ~31°C / 18°C · בוקרשט, ממוצע עונתי</div>
+      </div>
+    </div>
+
+    <div class="node" style="--emoji:'🧂'; --c:var(--amber)">
+      <div class="card">
+        <div class="day-head">
+          <span class="day-name">מכרה מלח בדרך + נסיעה לפויאנה מארולוי</span>
+          <span class="day-date">ב׳ · 3.8</span>
+        </div>
+        <div class="day-body">
+          נוסעים לפויאנה מארולוי דרך <a href="https://maps.app.goo.gl/268tRLqatUvKdYD76" target="_blank">מכרה המלח סלאניק פראהובה</a> (כ-1:45 שעות מבוקרשט, פחות או יותר בדרך צפונה). בפנים: קארטינג, פינג-פונג, ביליארד ומתקני משחק, וטמפרטורה קבועה של 12–13°C. ממשיכים ל-Casa Raul, מגיעים בערב.
+        </div>
+        <div class="weather">☀️ ~30°C יציאה מבוקרשט · ~23°C פויאנה מארולוי בהגעה</div>
+      </div>
+    </div>
+
+    <div class="gap-note">★ בית הבסיס: Casa Raul ★</div>
+
+    <div class="node" style="--emoji:'🏞️'; --c:var(--grass)">
+      <div class="card">
+        <div class="day-head">
+          <span class="day-name">יום טבע</span>
+          <span class="day-date">ג׳ · 4.8</span>
+        </div>
+        <div class="option-grid">
+          <div class="option">
+            <div class="opt-label">פעילות עיקרית · מצוקי זרנשט</div>
+            <a href="https://www.google.com/maps?q=Prapastiile+Zarnestiului" target="_blank">מצוקי זרנשט (Prăpăstiile Zărneștiului)</a> — קניון סלעי דרמטי עם קירות צרים וגבוהים, שביל חצץ כמעט מישורי ומוצל (כשעה לכל כיוון), מתאים למשפחות. שער הכניסה לפארק הלאומי פיאטרה קראיולוי.
+          </div>
+          <div class="option">
+            <div class="opt-label">תוספת לבחירה · חוות גבינה</div>
+            <a href="https://www.google.com/maps?q=traditional+sheepfold+cheese+Bran+Moeciu" target="_blank">דיר כבשים מסורתי (stână)</a> בגבעות בראן–מוצ׳או — רואים את הרועים מכינים ומעשנים גבינת טלמאה/קאש, טועמים מוצרי חלב טריים ופוגשים את העדר. כפרי ומאוד ידידותי לילדים; כדאי להתקשר מראש לתיאום.
+          </div>
+        </div>
+        <div class="weather">⛅ ~23°C / 12°C · פויאנה מארולוי, ממוצע עונתי</div>
+      </div>
+    </div>
+
+    <div class="node" style="--emoji:'🏰'; --c:var(--orange)">
+      <div class="card">
+        <div class="day-head">
+          <span class="day-name">טירת בראן ומצודת רשנוב</span>
+          <span class="day-date">ד׳ · 5.8</span>
+        </div>
+        <div class="day-body">
+          <a href="https://www.google.com/maps?q=Bran+Castle" target="_blank">טירת בראן</a> (טירת דרקולה!) ·
+          <a href="https://www.google.com/maps?q=Rasnov+Fortress" target="_blank">מצודת רשנוב</a>
+        </div>
+        <div class="weather">⛅ ~24°C / 13°C · אזור בראשוב, ממוצע עונתי</div>
+      </div>
+    </div>
+
+    <div class="node" style="--emoji:'🌊'; --c:var(--pink)">
+      <div class="card">
+        <div class="day-head">
+          <span class="day-name">פארק מים</span>
+          <span class="day-date">ה׳ · 6.8</span>
+        </div>
+        <div class="day-body">
+          <a href="https://paradisulacvatic.ro/" target="_blank">Aquatic Paradise Brasov</a> — בריכות מקורות ופתוחות, מגלשות וסאונות, מדורג היטב למשפחות, וגם פתרון מצוין ליום גשום.
+        </div>
+        <div class="weather">⛅ ~24°C / 13°C · בראשוב, ממוצע עונתי (אופציה מקורה אם יורד גשם)</div>
+      </div>
+    </div>
+
+    <div class="node" style="--emoji:'🏙️'; --c:var(--amber)">
+      <div class="card">
+        <div class="day-head">
+          <span class="day-name">העיר העתיקה של בראשוב</span>
+          <span class="day-date">ו׳ · 7.8</span>
+        </div>
+        <div class="day-body">
+          <a href="https://www.google.com/maps?q=Brasov+old+town" target="_blank">העיר העתיקה</a> ·
+          טיפוס אל <a href="https://www.google.com/maps?q=Brasov+sign+Mount+Tampa" target="_blank">שלט בראשוב על הר טמפה</a> (כשעה, בינוני, מדורג עקבית טוב יותר מהרכבל — שיש בו תורים ארוכים ונסיעה ישנה וצפופה) ·
+          <a href="https://www.parc-aventura.ro/en/" target="_blank">פארק ההרפתקאות של בראשוב (פארק חבלים)</a> אם נשאר כוח
+        </div>
+        <div class="move-note">🚚 משפחה 1 עוברת היום לבראשוב — עוזבת את Vibe House Madisson (פויאנה מארולוי) ומתמקמת בבראשוב לשארית השהות.</div>
+        <div class="weather">⛅ ~24°C / 13°C · בראשוב, ממוצע עונתי</div>
+      </div>
+    </div>
+
+    <div class="node" style="--emoji:'🐎'; --c:var(--grass)">
+      <div class="card">
+        <div class="day-head">
+          <span class="day-name">משפחות 2+3</span>
+          <span class="day-date">שבת · 8.8</span>
+        </div>
+        <div class="option-grid">
+          <div class="option">
+            <div class="opt-label">פעילות עיקרית · רכיבה על סוסים</div>
+            <a href="https://www.google.com/maps?q=Poiana+Brasov+Horse+Riding+Center" target="_blank">מרכז הרכיבה פויאנה בראשוב</a> מדורג גבוה למשפחות, יש פונים לרוכבים צעירים וסוסים לגדולים, שבילי יער ומתקני משחק להפסקות בין הרכיבות.
+          </div>
+          <div class="option">
+            <div class="opt-label">תוספת ערב לבחירה · צפייה בדובים</div>
+            <a href="https://www.romanianfriend.com/tours/bear-watching-trip-brasov-transylvania" target="_blank">סיור צפייה בדובים מבראשוב</a> — בלי הליכה, יושבים וממתינים במחבוא מאובטח, סיכוי גבוה לראות (רוב הקבוצות רואות 5+), יציאה בערב (16:00–18:00), משתלב יפה אחרי יום פעיל. לוודא גיל מינימום עם המפעיל (לרוב 7+ עד 12+).
+          </div>
+        </div>
+        <div class="weather">⛅ ~23°C / 12°C · אזור בראשוב, ממוצע עונתי · הערבים קרירים, קחו שכבה</div>
+      </div>
+    </div>
+
+    <div class="node" style="--emoji:'🏰'; --c:var(--blue)">
+      <div class="card">
+        <div class="day-head">
+          <span class="day-name">משפחות 1+2+3</span>
+          <span class="day-date">א׳ · 9.8</span>
+        </div>
+        <div class="day-body">
+          חוזרים לקבוצה המלאה היום. נוסעים מפויאנה מארולוי לסינאיה (כ-1.5 שעות) עם עצירה ב<a href="https://cantacuzinocastle.com/en/" target="_blank">טירת קנטקוזינו</a> בבושטני שבדרך. טירה נאו-רומנית (1911), מקום הצילומים האמיתי של "אקדמיית נברמור" בסדרה "מרחבת" (Wednesday) של נטפליקס. סיור מודרך בפנים (כ-30 דק׳), מרפסת עם נוף להרי בוצ׳ג׳, גנים עם מזרקות ואומנות מודרנית, פארק הרפתקאות קטן לילדים ואומגה.
+        </div>
+        <div class="option-grid">
+          <div class="option">
+            <div class="opt-label">אופציית טירה</div>
+            <a href="https://bilete.peles.ro" target="_blank">טירת פלש</a> אפשר לשלב היום, ולפצל את ביקור הטירה בסינאיה ואת זמן הבריכה לאורך השהות. דורש הזמנת כניסה מתוזמנת מראש.
+          </div>
+          <div class="option">
+            <div class="opt-label">אופציה ללא טירה · מסלול מפל</div>
+            <a href="https://www.google.com/maps?q=Cascada+Urlatoarea+Busteni" target="_blank">מפל אורלטוארה</a> — שביל יער קל ומסומן מאזור הרכבל בבושטני, כשעה הלוך-חזור, מתאים לילדים ולמבוגרים כאחד, חינם, בלי כרטיסים ובלי תורים.
+          </div>
+        </div>
+        <div class="weather">⛅ ~24°C / 13°C · סינאיה/בושטני, ממוצע עונתי</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="section-title">
+    <span class="badge">לינה</span>
+    <h2>איפה ישנים 🏨</h2>
+  </div>
+
+  <div class="rail">
+
+    <div class="node" style="--emoji:'🏡'; --c:var(--grass)">
+      <div class="card">
+        <div class="acc-head">
+          <div class="acc-name">Casa Raul <span style="font-size:12px;font-weight:700;color:var(--text-dim)">— משפחות 2 ו-3</span></div>
+          <div class="acc-dates">3 – 9.8 · 6 לילות</div>
+        </div>
+        <div class="acc-address">Principala nr.329, 507160 Poiana Mărului ·
+          <a href="https://www.google.com/maps?q=45.60412,25.18216" target="_blank">מפה</a>
+        </div>
+        <div class="acc-grid">
+          <div class="label">סוג חדר</div><div class="val">בית עם חמישה חדרי שינה</div>
+          <div class="label">צ׳ק-אין</div><div class="val">15:00 – 23:30</div>
+          <div class="label">צ׳ק-אאוט</div><div class="val">08:00 – 11:00</div>
+          <div class="label">ביטול חינם</div><div class="val">עד 19.7.2026</div>
+          <div class="label">טלפון</div><div class="val"><span class="ltr">+40 743 176 315</span></div>
+        </div>
+        <div class="acc-links">
+          <a class="btn" href="tel:+40743176315">התקשרו למקום</a>
+          <a class="btn gold" href="https://www.google.com/maps?q=45.60412,25.18216" target="_blank">כתובת 📍</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="node" style="--emoji:'🏠'; --c:var(--orange)">
+      <div class="card">
+        <div class="acc-head">
+          <div class="acc-name">Vibe House Madisson <span style="font-size:12px;font-weight:700;color:var(--text-dim)">— משפחה 1</span></div>
+          <div class="acc-dates">3 – 9.8 · 6 לילות</div>
+        </div>
+        <div class="acc-address">Str. Valea Lui Vodă, nr. 319E, Poiana Mărului, jud. Brașov ·
+          <a href="https://maps.app.goo.gl/mFyg16P6GEXqotmV6" target="_blank">מפה</a>
+        </div>
+        <div class="acc-grid">
+          <div class="label">סוג חדר</div><div class="val">בית עם ארבעה חדרי שינה, 5 חדרי רחצה, ל-9 אנשים</div>
+          <div class="label">דירוג</div><div class="val">9.7/10 יוצא מן הכלל (Booking.com)</div>
+          <div class="label">שירותים</div><div class="val">גינה, מרפסת שמש, אח חיצונית, ברביקיו, חניה חינם, WiFi חינם</div>
+          <div class="label">מרחק</div><div class="val">כ-0.8 ק״מ מ-Casa Raul, 18 ק״מ מטירת בראן</div>
+        </div>
+        <div class="acc-links">
+          <a class="btn gold" href="https://maps.app.goo.gl/mFyg16P6GEXqotmV6" target="_blank">כתובת 📍</a>
+          <a class="btn" href="https://www.booking.com/hotel/ro/vibe-house-madisson.html" target="_blank">צפו ב-Booking.com</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer-note">★ שלוש משפחות, הרבה כיף · טיול נעים לכולם! 🇷🇴🎉 ★</div>
+</div>
+</body>
+</html>
